@@ -1,0 +1,22 @@
+{
+  "id": "wallpaper-engine",
+  "name": "Wallpaper Engine Noctalia",
+  "version": "0.0.1",
+  "minNoctaliaVersion": "3.6.0",
+  "author": "HomieDerPrakti",
+  "license": "MIT",
+  "repository": "https://github.com/HomieDerPrakti/noctalia-plugins",
+  "description": "A simple example plugin",
+  "entryPoints": {
+    "barWidget": "BarWidget.qml",
+    "panel": "Panel.qml"
+  },
+  "dependencies": {
+    "plugins": []
+  },
+  "metadata": {
+    "defaultSettings": {
+        "count": 0
+    }
+  }
+}
