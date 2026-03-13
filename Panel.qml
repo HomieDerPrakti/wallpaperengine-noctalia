@@ -6,6 +6,8 @@ import Qt.labs.folderlistmodel
 import Quickshell.Io
 import QtQml.Models
 import QtQuick.Controls
+import qs.Services.UI
+import Quickshell
 Item {
   id: root
   property var pluginApi: null
@@ -86,6 +88,13 @@ Item {
                 cursorShape: Qt.PointingHandCursor
                 anchors.fill: parent
                 hoverEnabled: true
+                onClicked: {
+                  ToastService.showNotice("wallpaper: " + wallpaperItem.wp_id + " " + wallpaperItem.title)
+                  for (var i = 0; i < Quickshell.screens.length; i++) {
+                    root.saveWallpaper(wallpaperItem.wp_id, Quickshell.screens[i].name)
+                  }
+                  
+                }
               }
               Component.onCompleted: {
                 console.log("wp_id:", wp_id, "previewPath:", previewPath)
@@ -93,9 +102,10 @@ Item {
             }
             Rectangle {
               Layout.fillWidth: true
-              Layout.preferredHeight: 20 * Style.uiScaleRatio
               color: "transparent"
+              Layout.preferredHeight: 20 * Style.uiScaleRatio
               NText {
+                anchors.centerIn: parent
                 text: title
                 color: Color.mOnSurface
                 pointSize: Style.fontSizeS
@@ -112,4 +122,11 @@ Item {
     showFiles: false
     showDirs: true
   }
+  function saveWallpaper(wpId, screen) {
+    var current = pluginApi.pluginSettings.activeWallpaper || {}
+    var updated = Object.assign({}, current)  // create a new object
+    updated[screen] = wpId
+    pluginApi.pluginSettings.activeWallpaper = updated  // assign new object
+    pluginApi.saveSettings()
+}
 }

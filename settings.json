@@ -1,4 +1,6 @@
 {
-  "active_wallpaper": null,
-  "message": "test"
+  "activeWallpaper": {
+    "DP-2": "1959836574",
+    "HDMI-A-1": "1959836574"
+  }
 }
