@@ -12,11 +12,12 @@ Item {
 
     onActiveWallpaperChanged: {
         if (Object.keys(activeWallpaper).length === 0) return
-        var cmd = "killall linux-wallpaperengine; "
+        var cmd = "killall linux-wallpaperengine; linux-wallpaperengine "
         for (var screen in activeWallpaper) {
-            cmd += `linux-wallpaperengine -r ${screen} -b ${activeWallpaper[screen]} & `
+            cmd += `-r ${screen} -b ${activeWallpaper[screen]} `
         }
         setWallpaper.command = ["bash", "-c", cmd]
+        setWallpaper.running = false
         setWallpaper.running = true
     }
 
