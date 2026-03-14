@@ -20,6 +20,20 @@ Item {
         setWallpaper.running = false
         setWallpaper.running = true
     }
+    function initSettings() {
+        if (!pluginApi.pluginSettings.activeWallpaper) {
+            pluginApi.pluginSettings.activeWallpaper = {}
+            pluginApi.saveSettings()
+        }
+        if (!pluginApi.pluginSettings.allMonitors) {
+            pluginApi.pluginSettings.allMonitors = true
+            pluginApi.saveSettings()
+        }
+    }
+
+    onPluginApiChanged: {
+        if (pluginApi) initSettings()
+    }
 
     Process {
         id: setWallpaper
